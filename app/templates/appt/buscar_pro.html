@@ -1,0 +1,447 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buascar producto</title>
+     <!-- Font Awesome CDN -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url("{% static 'appt/images/fondo7.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        /* Barra de navegación */
+        .navbar {
+            background-color: #003471;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-logo img {
+            width: 40px;
+            height: auto;
+            margin-right: 15px;
+        }
+
+        .navbar-logo span {
+            font-size: 20px;
+            font-weight: bold;
+            color:#da7426;
+        }
+
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .navbar-links a {
+            color: #fff;  /* Color de los enlaces del menú de navegación */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .navbar-links a:hover {
+            color: #da7426;  /* Hover en blanco en el menú de navegación */
+        }
+
+          /* Espaciado adicional para el enlace de "Acceso" */
+          .navbar-links a:last-child {
+            margin-right: 30px;
+        }
+
+         /* Estilos de formulario de búsqueda */
+
+         .search-form {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-form input[type="number"] {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        .search-form input[type="submit"] {
+            padding: 8px 12px;
+            background-color: #da7426;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .search-form input[type="submit"]:hover {
+            background-color: #c5671e;
+        }
+
+        /* Menú hamburguesa */
+        .menu-icon {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 25px;
+            height: 18px;
+            margin-right: 20px;
+        }
+
+        .menu-icon div {
+            background-color: white;
+            height: 3px;
+            border-radius: 2px;
+        }
+
+        .navbar-responsive {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            background-color: #003471;
+            width: 100%;
+        }
+
+        .navbar-responsive a {
+            margin: 15px 0;
+            color: #fff;  /* Color de los enlaces del menú responsivo */
+        }
+
+        .navbar-responsive a:hover {
+            color: #da7426;  /* Hover en blanco en el menú responsivo */
+        }
+
+        /* Estilos de mensajes */
+        .messages {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .alert {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .alert-success {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+
+        .alert-error {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+
+        .alert-warning {
+            background-color: #fcf8e3;
+            color: #8a6d3b;
+        }
+
+        /* Estilos de contenido */
+        h2 {
+            text-align: center;
+            color: #fff;
+            background-color: #003471;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        li {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            margin: 10px 0;
+            padding: 15px;
+            color: #333;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        p {
+            margin: 0 0 10px;
+            font-size: 18px;
+        }
+
+        /* Color de los enlaces dentro del formulario, conservado como estaba */
+        a {
+            text-decoration: none;
+            color: #3498db;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #2980b9;
+        }
+
+        .btn-new, .btn-home {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: #da7426;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-new:hover, .btn-home:hover {
+            background-color: white;
+        }
+
+        .btn-home {
+            background-color: #003471;
+        }
+
+        .btn-home:hover {
+            background-color: white;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+
+           /* Estilos de los resultados */
+           .results-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+            gap: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .product-card {
+            background-color: rgba(0, 52, 113, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            width: 250px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .product-card h3 {
+            font-size: 22px;
+            color: #da7426;
+            margin: 10px 0;
+        }
+
+        .product-card p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .product-card .price {
+            font-weight: bold;
+            font-size: 18px;
+            color: #c5e1a5;
+        }
+
+        .product-card img {
+            width: 100%; /* Asegura que la imagen ocupe todo el ancho de la tarjeta */
+            height: auto; /* Mantiene la proporción de la imagen */
+            border-radius: 5px; /* Da bordes redondeados a la imagen */
+            margin-top: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para resaltar la imagen */
+        }
+
+        /* Estilos para el mensaje de error */
+        .alert-message {
+            background-color: rgba(0, 52, 113, 0.8); /* Color de fondo similar a las tarjetas */
+            color: #c5e1a5; /* Color verde del precio */
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px auto;
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+            font-size: 18px;
+        }
+
+         /* Estilo del título de bienvenida */
+         .welcome-title {
+            text-align: center;
+            font-size: 36px;
+            margin-top: 40px;
+            padding: 20px;
+            background-color:  rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .welcome-title h1 {
+            margin: 0;
+            color: #fff;
+        }
+
+        .welcome-title p {
+            margin: 10px 0 0;
+            font-size: 18px;
+            color: #da7426;
+        }
+
+        /* Estilos responsivos */
+
+        /* Footer */
+        footer {
+            background-color: #252525;  /* Color de fondo del footer */
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        footer a {
+            color: #da7426;  /* Color de los enlaces en el footer */
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: white;  /* Hover en blanco en el footer */
+        }
+
+        /* Estilos responsivos */
+        @media (max-width: 768px) {
+            .navbar-links {
+                display: none;
+            }
+
+            .menu-icon {
+                display: flex;
+            }
+
+            .navbar-responsive {
+                display: none;
+            }
+
+            .navbar-responsive.active {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra de navegación -->
+    <div class="navbar">
+        <div class="navbar-logo">
+            <img src="{% static 'appt/images/logo1.png' %}" alt="Logo">  <!-- Ruta de la imagen del logo -->
+            <span>Productos</span>
+        </div>
+        <div class="navbar-links">
+            <a href="{% url 'padre' %}">Inicio</a>
+            <a href="{% url 'List' %}">Proveedores</a>
+            <a href="{% url 'List_client' %}">Clientes</a>
+            <a href="{% url 'List_product' %}">Productos</a>
+            <a href="https://www.office.com/?auth=1">Office</a>
+
+             <!-- Formulario de búsqueda en la barra de navegación -->
+
+              <form action="{% url 'productos' %}" method="get" class="search-form">
+                <input type="number" name="codigo" placeholder="Código de producto" required>
+                <input type="submit" value="Buscar">
+            </form>
+            <a href="">Acceso <i class="fas fa-sign-in-alt"></i></a>
+        </div>
+        <div class="menu-icon" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <!-- Menú hamburguesa responsivo -->
+    <div class="navbar-responsive" id="navbarResponsive">
+        <a href="{% url 'padre' %}">Inicio</a>
+        <a href="{% url 'List' %}">Proveedores</a>
+        <a href="{% url 'List_client' %}">Clientes</a>
+        <a href="{% url 'List_product' %}">Productos</a>
+        <a href="https://www.office.com/?auth=1">Office</a>
+
+        <!-- Formulario de búsqueda en la barra de navegación -->
+
+              <form action="/app/buscar/" method="get" class="search-form">
+                <input type="number" name="codigo" placeholder="Código de producto" required>
+                <input type="submit" value="Buscar">
+            </form>
+            <a href="">Acceso <i class="fas fa-sign-in-alt"></i></a>
+    </div>
+
+  <!-- Título de bienvenida -->
+  <div class="welcome-title">
+    <h1>Productos Buscados.</h1>
+    <p>Gestiona fácilmente tus proveedores, clientes y productos</p>
+</div>
+
+ <!-- Contenedor de resultados de búsqueda -->
+ {% if nombre %}
+ <div class="results-container">
+     {% for producto in nombre %}
+     <div class="product-card">
+         <h3>{{ producto.nombre }}</h3>
+         <p>Sección: {{ producto.seccion }}</p>
+         <p class="price">Precio: ${{ producto.precio }}</p>
+         <p>Proveedor: {{ producto.proveedor }}</p>
+         <p>Producto:</p>
+         <img src="{{ producto.imagen.url }}" alt="Producto" />
+     </div>
+     {% endfor %}
+ </div>
+ {% else %}
+ <p class="alert-message">
+    No se encontraron resultados para el código: <strong style="color: #c5e1a5;">{{ codigo }}</strong>
+</p>
+ {% endif %}
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2024 Clientes | <a href="{% url 'padre' %}">Inicio</a> | <a href="{% url 'New' %}">Agregar Cliente</a></p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navbarResponsive = document.getElementById('navbarResponsive');
+            navbarResponsive.classList.toggle('active');
+        }
+    </script>
+
+</body>
+</html>

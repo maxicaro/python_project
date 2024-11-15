@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Código</title>
+    <style>
+        /* Estilos para toda la página */
+        body {
+            background-color: #f0f8ff;
+            font-family: 'Arial', sans-serif;
+            background: url("{% static 'appt/images/fondo6.jpg' %}") no-repeat center center fixed; /* Reemplaza con una URL válida */
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        /* Estilos para el enlace de inicio */
+        a {
+            color: white;
+            background-color: #003471;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        a:hover {
+            background-color: #da7426;
+            color: white;
+        }
+
+        /* Estilos para el formulario */
+        form {
+            width: 100%;
+            max-width: 400px;
+            background-color: #003471;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Estilo del título */
+        h1.titulo-formulario {
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        /* Estilos para el input */
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input[type="number"]::placeholder {
+            color: #ccc;
+        }
+
+        input[type="number"]:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+            outline: none;
+        }
+
+        /* Estilos para el botón de enviar */
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #da7426;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #c5671e;
+        }
+
+        input[type="submit"]:active {
+            background-color: #a65319;
+        }
+
+        /* Estilo del mensaje de éxito o error */
+        h3.ok {
+            color: #da7426;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body class="pagina-registro">
+    <!-- Botón de "Ir a inicio" con estilo añadido -->
+    <a href="{% url 'List_product' %}">Ir a inicio</a>
+    
+    <form action="/app/buscar/" method="get" class="formulario">
+        {% csrf_token %}
+        <h1 class="titulo-formulario">¡Buscar!</h1>
+        <input type="number" id="codigo" name="codigo" placeholder="Ingresa el código:" class="input-texto" required>
+        <input type="submit" name="register" value="Buscar" class="boton-submit">
+    </form>
+
+    <!-- Mostrar el mensaje de éxito o error -->
+    {% if mensaje %}
+    <h3 class="ok">{{ mensaje }}</h3>
+    {% endif %}
+</body>
+</html>

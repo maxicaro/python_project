@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- Mostrar mensaje de éxito si existe -->
+    {% if mensaje %}
+        <p>{{ mensaje }}</p>
+    {% endif %}
+
+    <!-- Mostrar la lista de proveedores -->
+    <ul>
+        {% for p in Proveedores %}
+            <li>Nombre: {{ p.nombre }}</li>  
+            <li>Apellido: {{ p.apellido }}</li>
+            <li>Dirección: {{ p.direccion }}</li>
+            <li>Email: {{ p.email }}</li>
+            <li>Teléfono: {{ p.telefono }}</li>
+            <button>
+                <a href="{% url 'eliminarproveedor' p.nombre %}">Eliminar</a>
+            </button>
+            <br><br>
+        {% endfor %}
+    </ul>
+
+    <br>
+
+    <a href="{% url 'proveedores_forms' %}">Agregar otro Proveedor</a>
+
+</body>
+</html>

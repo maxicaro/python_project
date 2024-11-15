@@ -1,0 +1,157 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Producto</title>
+    <style>
+        body {
+            background-color: #f0f8ff;
+            font-family: Arial, sans-serif;
+            background: url("{% static 'appt/images/fondo6.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            width: 100%;
+            max-width: 400px;
+            background-color: #003471;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: white;
+            font-weight: bold;
+            text-align: left;
+            width: 100%;
+        }
+
+        input[type="text"], input[type="number"], select, input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]::placeholder, input[type="number"]::placeholder {
+            color: #ccc;
+        }
+
+        input[type="text"]:focus, input[type="number"]:focus, select:focus, input[type="file"]:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+            outline: none;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #da7426;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #c5671e;
+        }
+
+        input[type="submit"]:active {
+            background-color: #a65319;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .btn-home {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-home:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-home:active {
+            background-color: #003c82;
+        }
+    </style>
+</head>
+<body>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>Agregar Producto</h2>
+
+        <label for="nombre">Nombre del Producto:</label>
+        <input type="text" name="nombre" placeholder="Nombre del Producto" required>
+
+        <label for="codigo">Código del Producto:</label>
+        <input type="text" name="codigo" placeholder="Código del Producto" required>
+
+        <label for="seccion">Sección del Producto:</label>
+        <select name="seccion" required>
+            {% for seccion in form.fields.seccion.queryset %}
+                <option value="{{ seccion.id }}">{{ seccion.nombre }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="precio">Precio del Producto:</label>
+        <input type="number" name="precio" placeholder="Precio del Producto" required>
+
+        <label for="imagen">Imagen del Producto:</label>
+        <input type="file" name="imagen" accept="image/*" required>
+
+        <label for="proveedor">Nombre del Proveedor:</label>
+        <select name="proveedor" required>
+            {% for proveedor in form.fields.proveedor.queryset %}
+                <option value="{{ proveedor.id }}">{{ proveedor.nombre }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="submit" value="Enviar">
+        <div class="button-container">
+            <a href="{% url 'List_product' %}" class="btn-home">Regresar</a>
+        </div>
+    </form>
+
+</body>
+</html>

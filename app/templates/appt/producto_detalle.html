@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: url("{% static 'appt/images/fondo6.jpg' %}") no-repeat center center fixed;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        color: #fff;
+    }
+    h1, h3 {
+        text-align: center;
+        background-color: #003c82;
+        padding: 10px;
+        border-radius: 10px;
+        color: #fff;
+    }
+    p {
+        text-align: center;
+        background-color: rgba(15, 14, 14, 0.8);
+        padding: 15px;
+        border-radius: 8px;
+        margin: 20px auto;
+        max-width: 400px;
+        color: #faf7f7;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    .image-container {
+        text-align: center;
+        margin: 20px 0;
+    }
+    .image-container img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        max-height: 300px;
+    }
+    a {
+        text-decoration: none;
+        color: #3498db;
+        font-weight: bold;
+    }
+    a:hover {
+        color: #2980b9;
+    }
+    .btn-home, .btn-back {
+        display: inline-block;
+        margin-top: 20px;
+        background-color: #003471;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-transform: uppercase;
+        font-weight: bold;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        margin-right: 10px;
+    }
+    .btn-home:hover, .btn-back:hover {
+        background-color: #002c5a;
+    }
+    .btn-home {
+        background-color: #da7426;
+    }
+    .button-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+</style>
+<body>
+
+    <div>
+        <h1>Productos</h1>
+        <h3><p>Nombre: <i>{{ object.nombre  }}</i></p></h3>
+        <h3><p>Código: <i>{{ object.codigo  }}</i></p></h3>
+        <h3><p>Sección: <i>{{ object.seccion  }}</i></p></h3>
+        <h3><p>Precio: <i>{{ object.precio  }}</i></p></h3>
+        
+        <div class="image-container">
+            <p>Imagen:</p>
+            <img src="{{ object.imagen.url }}" alt="Producto" />
+        </div>
+
+        <h3><p>Nombre del Proveedor: <i>{{ object.proveedor  }}</i></p></h3>
+
+        <div class="button-container">
+            <a href="{% url 'List_product' %}" class="btn-back">Volver</a>
+            <a href="{% url 'padre' %}" class="btn-home">Inicio</a>
+        </div>
+    </div>
+
+</body>
+</html>

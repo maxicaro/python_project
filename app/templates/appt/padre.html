@@ -1,0 +1,346 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+   
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url("{% static 'appt/images/fondo7.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            color: #fff;
+        }
+
+       .navbar {
+            background-color: #003471;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-logo img {
+            width: 40px;
+            height: auto;
+            margin-right: 15px;
+        }
+
+        .navbar-logo span {
+            font-size: 20px;
+            font-weight: bold;
+            color: #da7426;
+        }
+
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .navbar-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .navbar-links a:hover {
+            color: #da7426;
+        }
+
+        /* Espaciado adicional para el enlace de "Acceso" */
+        .navbar-links a:last-child {
+            margin-right: 30px;
+        }
+
+        .nav-item.dropdown {
+           margin-left: auto; /* Mueve el botón completamente hacia la izquierda de la sección de enlaces */
+           margin-right: 85px; /* Ajusta la cantidad de espacio desde la derecha */
+        }
+
+        .dropdown-menu .dropdown-item {
+           text-align: center;
+           background-color: #003471; /* Color de fondo gris */
+        }
+
+
+        /* Estilos de formulario de búsqueda */
+
+        .search-form {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-form input[type="number"] {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        .search-form input[type="submit"] {
+            padding: 8px 12px;
+            background-color: #da7426;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .search-form input[type="submit"]:hover {
+            background-color: #c5671e;
+        }
+
+        
+
+        /* Menú hamburguesa */
+        .menu-icon {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 25px;
+            height: 18px;
+            margin-right: 20px;
+        }
+
+        .menu-icon div {
+            background-color: white;
+            height: 3px;
+            border-radius: 2px;
+        }
+
+        .navbar-responsive {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            width: 100%;
+        }
+
+        .navbar-responsive a {
+            margin: 15px 0;
+            color: #fff;  /* Color de los enlaces del menú responsivo */
+        }
+
+        .navbar-responsive a:hover {
+            color: #da7426;  /* Hover en blanco en el menú responsivo */
+        }
+
+
+        @media (max-width: 768px) {
+            .navbar-links {
+                display: none;
+            }
+
+            .menu-icon {
+                display: flex;
+            }
+
+            .navbar-responsive {
+                display: none;
+            }
+
+            .navbar-responsive.active {
+                display: flex;
+            }
+        }
+
+        /* Estilo del título de bienvenida */
+        .welcome-title {
+            text-align: center;
+            font-size: 36px;
+            margin-top: 40px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .welcome-title h1 {
+            margin: 0;
+            color: #fff;
+            font-size: 60px;
+        }
+
+        .welcome-title p {
+            margin: 10px 0 0;
+            font-size: 18px;
+            color: #da7426;
+        }
+
+        /* Estilos responsivos */
+        @media (max-width: 768px) {
+            .navbar-links {
+                display: none;
+            }
+
+            .menu-icon {
+                display: flex;
+            }
+
+            .navbar-responsive {
+                display: none;
+                
+            }
+
+            .navbar-responsive.active {
+                display: flex;
+            }
+
+            .welcome-title {
+                font-size: 28px;
+            }
+
+            .welcome-title p {
+                font-size: 16px;
+            }
+        }
+
+        footer {
+            background-color: #252525;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        footer a {
+            color: #da7426;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        
+    </style>
+</head>
+<body>
+
+    <!-- Barra de navegación -->
+    <div class="navbar">
+        <div class="navbar-logo">
+            <img src="{% static 'appt/images/logo1.png' %}" alt="Logo">
+            <span>Admin</span>
+        </div>
+        <div class="navbar-links">
+            <a href="{% url 'index' %}">Inicio</a>
+            <a href="{% url 'List' %}">Proveedores</a>
+            <a href="{% url 'List_client' %}">Clientes</a>
+            <a href="{% url 'List_product' %}">Productos</a>
+            <a href="https://www.office.com/?auth=1">Office</a>
+    
+            <!-- Formulario de búsqueda en la barra de navegación -->
+            <form action="/app/buscar/" method="get" class="search-form">
+                <input type="number" name="codigo" placeholder="Código de producto" required>
+                <input type="submit" value="Buscar">
+            </form>
+    
+            <!-- Menú desplegable de cuenta -->
+            <div class="nav-item dropdown">
+                {% if request.user.is_authenticated %}
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ request.user.username }}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" href="{% url 'logout_admin' %}">Cerrar sesión</a></li>
+                    </ul>
+                {% else %}
+                    <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Cuenta
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="accountDropdown">
+                        <li><a class="dropdown-item" href="{% url 'login_admin' %}">Iniciar sesión</a></li>
+                        <li><a class="dropdown-item" href="{% url 'registro' %}">Crear cuenta</a></li>
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    
+        <div class="menu-icon" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <!-- Menú hamburguesa responsivo -->
+    <div class="navbar-responsive" id="navbarResponsive">
+        <a href="{% url 'index' %}">Inicio</a>
+        <a href="{% url 'List' %}">Proveedores</a>
+        <a href="{% url 'List_client' %}">Clientes</a>
+        <a href="{% url 'List_product' %}">Productos</a>
+        <a href="https://www.office.com/?auth=1">Office</a>
+        
+        <form action="{% url 'busqueda_producto' %}" method="get" class="search-form">
+            <input type="number" name="codigo" placeholder="Código de producto" required>
+            <input type="submit" value="Buscar">
+        </form>
+        <div class="nav-links dropdown">
+            {% if request.user.is_authenticated %}
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ request.user.username }}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                    <li><a class="dropdown-item" href="{% url 'logout_admin' %}">Cerrar sesión</a></li>
+                </ul>
+            {% else %}
+                <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Cuenta
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="accountDropdown">
+                    <li><a class="dropdown-item" href="{% url 'login_admin' %}">Iniciar sesión</a></li>
+                    <li><a class="dropdown-item" href="{% url 'registro' %}">Crear cuenta</a></li>
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Título de bienvenida -->
+    <div class="welcome-title">
+        <h1>Bienvenido al Panel de Control</h1>
+        <p>Gestiona fácilmente tus proveedores, clientes y productos</p>
+    </div>
+
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2024 Proveedores | <a href="{% url 'index' %}">Inicio</a> | <a href="{% url 'New' %}">Agregar Proveedor</a></p>
+    </footer>
+
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+ <script>
+    function toggleMenu() {
+        const navbarResponsive = document.getElementById('navbarResponsive');
+        navbarResponsive.classList.toggle('active');
+    }
+</script>
+ 
+</body>
+</html>
+
+
+

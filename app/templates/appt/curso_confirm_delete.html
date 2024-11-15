@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        background: url("{% static 'appt/images/fondo7.jpg' %}") no-repeat center center fixed; /* Reemplaza con una URL válida */
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        color: #fff;
+    }
+    .delete-container {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        max-width: 400px;
+        margin: auto;
+    }
+    h2 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #e74c3c;
+    }
+    p {
+        font-size: 18px;
+        margin-bottom: 30px;
+        color: #333;
+    }
+    input[type="submit"] {
+        padding: 10px 20px;
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    input[type="submit"]:hover {
+        background-color: #c0392b;
+    }
+    a.btn-cancel {
+        display: inline-block;
+        margin-top: 20px;
+        background-color: #003471;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    a.btn-cancel:hover {
+        background-color: #2980b9;
+    }
+</style>
+</head>
+<body>
+
+    <div class="delete-container">
+        <h2>Confirmar Eliminación</h2>
+        <p>¿Estás seguro que deseas borrar al Proveedor "<strong>{{ object }}</strong>"?</p>
+        
+        <form method="post">
+            {% csrf_token %}
+            <input type="submit" value="Borrar">
+        </form>
+        
+        <a href="{% url 'List' %}" class="btn-cancel">Cancelar</a>
+    </div>
+
+</body>
+</html>

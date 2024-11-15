@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Producto</title>
+    <style>
+        /* Estilos para toda la página */
+        body {
+            background-color: #f0f8ff;
+            font-family: 'Arial', sans-serif;
+            background: url("{% static 'appt/images/fondo6.jpg' %}") no-repeat center center fixed; /* Reemplaza con una URL válida */
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Estilos para el enlace de inicio */
+        a {
+            color: white;
+            background-color: #003471;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        a:hover {
+            background-color: #da7426;
+            color: white;
+        }
+
+        /* Estilo para el párrafo */
+        p {
+            font-size: 18px;
+            color: #003471;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Estilo para la lista */
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            background-color: #003471;
+            color: white;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            font-size: 16px;
+        }
+        
+        ul li:nth-child(odd) {
+            background-color: #da7426;
+        }
+
+        /* Estilo para el contenedor de la lista */
+        .product-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <a href="{% url 'busqueda_producto' %}">Volver</a>
+
+    <p>Estamos buscando el CÓDIGO: {{ codigo }}</p>
+
+    {% if nombre %}
+    <div class="product-list">
+        <ul>
+            {% for nombre in nombre %}
+            <li>Sección: {{ nombre.seccion }}</li>
+            <li>Nombre: {{ nombre.nombre }}</li>
+            <li>Precio: {{ nombre.precio }}</li>
+            <li>Proveedor: {{ nombre.proveedor }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,149 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proveedores</title>
+    <style>
+        body {
+            background-color: #f0f8ff; /* Fondo azul claro */
+            font-family: 'Arial', sans-serif; /* Fuente del cuerpo */
+            background: url("{% static 'appt/images/fondo6.jpg' %}") no-repeat center center fixed; /* Reemplaza con una URL válida */
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            width: 100%;
+            max-width: 400px;
+            background-color: #003471; /* Fondo azul oscuro */
+            padding: 30px;
+            border-radius: 12px; /* Bordes redondeados */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Sombra para el formulario */
+            transition: all 0.3s ease; /* Transición suave para el hover */
+            color: white; /* Color del texto dentro del formulario */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centrar los elementos dentro del formulario */
+        }
+
+        form:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Sombra más intensa al hacer hover */
+        }
+
+        h2 {
+            text-align: center;
+            color: white; /* Color del título */
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: white; /* Color del texto de las etiquetas */
+            font-weight: bold;
+            text-align: left;
+            width: 100%; /* Para alinear las etiquetas con los inputs */
+        }
+
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            max-width: 100%; /* Ajuste del ancho máximo */
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease; /* Transición suave */
+        }
+
+        input[type="text"]::placeholder, input[type="email"]::placeholder {
+            color: #ccc; /* Color del texto placeholder */
+        }
+
+        input[type="text"]:focus, input[type="email"]:focus {
+            border-color: #007bff; /* Color del borde al hacer focus */
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.2); /* Sombra azul al enfocar */
+            outline: none; /* Elimina el borde predeterminado */
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #da7426; /* Botón naranja */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #c5671e; /* Naranja más oscuro al hacer hover */
+        }
+
+        input[type="submit"]:active {
+            background-color: #a65319; /* Naranja más intenso al hacer clic */
+        }
+
+        .button-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .btn-home {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-home:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-home:active {
+            background-color: #003c82;
+        }
+    </style>
+</head>
+<body>
+
+    <form method="post">
+        {% csrf_token %}
+        <h2>Proveedores</h2>
+
+        <label for="nombre">Nombre del Proveedor:</label>
+        <input type="text" name="nombre" value="{{ form.nombre.value|default_if_none:'' }}" placeholder="Nombre del Proveedor" required>
+        
+        <label for="apellido">Apellido del Proveedor:</label>
+        <input type="text" name="apellido" value="{{ form.apellido.value|default_if_none:'' }}" placeholder="Apellido del Proveedor" required>
+        
+        <label for="direccion">Dirección del Proveedor:</label>
+        <input type="text" name="direccion" value="{{ form.direccion.value|default_if_none:'' }}" placeholder="Dirección del Proveedor" required>
+        
+        <label for="email">Email del Proveedor:</label>
+        <input type="email" name="email" value="{{ form.email.value|default_if_none:'' }}" placeholder="Email del Proveedor" required>
+        
+        <label for="telefono">Teléfono del Proveedor:</label>
+        <input type="text" name="telefono" value="{{ form.telefono.value|default_if_none:'' }}" placeholder="Teléfono del Proveedor" required>
+
+        <input type="submit" value="Enviar">
+        <div class="button-container">
+            <a href="{% url 'List' %}" class="btn-home">Regresar</a>
+        </div>
+    </form>
+
+   
+
+</body>
+</html>

@@ -1,0 +1,488 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>Tienda</title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'appt/css/bootstrap.css/' %}" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <!--owl slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <!-- nice select -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha256-mLBIhmBvigTFWPSCtvdu6a76T+3Xyt+K571hupeFLg4=" crossorigin="anonymous" />
+  <!-- font awesome style -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="{% static 'appt/css/font-awesome.min.css/' %}" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'appt/css/style.css/' %}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{% static 'appt/css/responsive.css/' %}" rel="stylesheet" />
+
+  <style>
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .product-card {
+      margin-bottom: 20px;
+      background-color: #fff; /* Color de fondo */
+      border-radius: 8px; /* Bordes redondeados */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+      transition: transform 0.2s; /* Transición para el efecto hover */
+      padding: 16px; /* Espaciado interno */
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px); /* Levantar la tarjeta al pasar el mouse */
+    }
+
+   /* Estilo para el botón */
+  .product-card .btn.custom-btn {
+    background-color: #003471 !important; /* Color de fondo */
+    color: white !important;              /* Color del texto */
+    border: none;
+  }
+
+  /* Cambiar el color al pasar el mouse */
+  .product-card .btn.custom-btn:hover {
+    background-color: #002355 !important; /* Color de fondo en hover */
+  }
+
+  .card-footer .custom-btn:hover {
+    color: #da7426 !important; /* Color del texto al pasar el mouse */
+}
+
+@media (max-width: 768px) {
+    .floating-cart {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        margin: 0 auto 20px auto;
+        z-index: 1000;
+    }
+
+    /* Añade margen superior al contenedor de las tarjetas para evitar superposición */
+    .service_section .row {
+        margin-top: 150px; /* Ajusta el valor para que las tarjetas queden debajo del carrito */
+    }
+}
+
+/* Carrito flotante */
+.floating-cart {
+    position: fixed;
+    top: 155px;
+    right: 20px;
+    width: 300px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    z-index: 1000;
+}
+
+/* Estilo de tabla y encabezados */
+.floating-cart .table {
+    margin: 0;
+    font-size: 14px;
+}
+
+.floating-cart th {
+    background-color: #003471;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.floating-cart td {
+    color: #333333;
+}
+
+/* Botones dentro del carrito */
+.floating-cart .btn-success {
+    background-color: #28a745;
+    border: none;
+    font-size: 12px;
+    padding: 5px 8px;
+    margin: 0 3px;
+}
+
+.floating-cart .btn-danger {
+    background-color: #dc3545;
+    border: none;
+    font-size: 12px;
+    padding: 5px 30px;
+    margin-top: 4px;
+}
+
+/* Total y botón de pedido */
+.floating-cart .btn-success {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+}
+
+.floating-cart tfoot {
+    background-color: #f8f9fa;
+}
+
+.floating-cart .alert {
+    margin: 0;
+    padding: 5px;
+    font-size: 14px;
+    text-align: center;
+}
+ /* Ajustes en dispositivos móviles */
+ @media (max-width: 768px) {
+    .floating-cart {
+        position: absolute; /* Cambiamos a 'absolute' para que se ajuste mejor */
+        top: 0; 
+        left: 50%; 
+        transform: translateX(-50%); /* Centramos horizontalmente */
+        width: 90%; /* Ajustamos el ancho para pantallas pequeñas */
+        margin: 0 auto 20px auto; /* Margen abajo para espaciar de las tarjetas */
+        z-index: 1000; /* Asegura que esté sobre las tarjetas */
+    }
+}
+.cart-icon {
+    color: #003471; /* Color del ícono */
+    font-size: 18px; /* Tamaño del ícono */
+    margin-right: 8px; /* Espacio entre el ícono y el texto */
+    position: relative;
+    left: -10px; /* Ajusta este valor para desplazarlo más a la izquierda */
+}
+  </style>
+  
+</head>
+
+<body class="sub_page">
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="header_top">
+        <div class="container-fluid header_top_container">
+          <a class="navbar-brand " href="index.html"> Tro<span>Weld</span> </a>
+          <div class="contact_nav">
+            <a href="">
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+              <span>
+                Ubicación
+              </span>
+            </a>
+            <a href="">
+              <i class="fa fa-phone" aria-hidden="true"></i>
+              <span>
+                Llamar : +01 123455678990
+              </span>
+            </a>
+            <a href="">
+              <i class="fa fa-envelope" aria-hidden="true"></i>
+              <span>
+                demo@gmail.com
+              </span>
+            </a>
+          </div>
+          <div class="social_box">
+            <a href="">
+              <i class="fa fa-facebook" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-twitter" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-linkedin" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-instagram" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="header_bottom">
+        <div class="container-fluid">
+          <nav class="navbar navbar-expand-lg custom_nav-container ">
+            <a class="navbar-brand navbar_brand_mobile" href="index.html"> Tro<span>Weld</span> </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class=""> </span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav  ">
+                <li class="nav-item ">
+                  <a class="nav-link" href="{% url 'index' %}">Inicio <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="{% url 'servicio' %}">Servicio</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'acerca_de' %}"> Acerca de</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'cartera' %}">Cartera</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'tienda' %}">Tienda</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'contacto' %}">Contáctenos</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'login_admin' %}">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <span>
+                      Admin
+                    </span>
+                  </a>
+                </li>
+                {# Dropdown para la cuenta de usuario #}
+                <ul class="navbar-nav ms-auto">
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link  dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ request.user.username }} <!-- Muestra el nombre de usuario -->
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a></li> <!-- Cerrar sesión -->
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link  dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Cuenta
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="accountDropdown">
+                                <li><a class="dropdown-item" href="{% url 'login_usuario' %}">Iniciar sesión</a></li> <!-- Iniciar sesión -->
+                                <li><a class="dropdown-item" href="{% url 'registro' %}">Crear cuenta</a></li> <!-- Crear cuenta -->
+                            </ul>
+                        </li>
+                    {% endif %}
+               
+             
+             <!-- Cierre del boton de serrar y inciar sesion de booptrap-->
+              
+           </ul>
+
+                 <!-- end header section <form class="form-inline">
+                  <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                </form>-->
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <!-- end header section -->
+  </div>
+
+  <!-- service section -->
+
+  <section class="service_section layout_padding">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>Nuestros <span>Productos</span></h2>
+      </div>
+      <div style="float: right;">
+          
+           {% include "appt/widget.html" %}
+      </div>
+      <div class="row">
+        {% for producto in productos %}
+        <div class="col-sm-6 col-md-4">
+          <div class="card product-card">
+            <img src="{{ producto.imagen.url }}" alt="Producto" class="card-img-top" />
+            <div class="card-body text-center">
+              <h5 class="card-title">{{ producto.nombre }}</h5>
+              <p class="card-text">Precio: ${{ producto.precio }} Ars</p>
+              <p class="card-text">Sección: {{ producto.seccion }}</p>
+            </div>
+            <div class="card-footer text-center">
+
+              <a href="{% url 'carro:agregar' producto.id %}" class="btn custom-btn">Agregar al carro</a>
+
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  <!-- end service section -->
+
+  <!-- info section -->
+
+  <section class="info_section ">
+    <div class="info_container layout_padding2">
+      <div class="container">
+        <div class="info_logo">
+          <a class="navbar-brand" href="index.html"> Tro<span>Weld</span> </a>
+        </div>
+        <div class="info_main">
+          <div class="row">
+            <div class="col-md-3 col-lg-2">
+              <div class="info_link-box">
+                <h5>
+                  Enlace útil
+                </h5>
+                <ul>
+                  <li class=" active">
+                    <a class="" href="{% url 'index' %}">Inicio <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="">
+                    <a class="" href="{% url 'acerca_de' %}">Acerca de </a>
+                  </li>
+                  <li class="">
+                    <a class="" href="{% url 'servicio' %}">Servicios </a>
+                  </li>
+                  <li class="">
+                    <a class="" href="{% url 'cartera' %}"> Cartera </a>
+                  </li>
+                  <li class="">
+                    <a class="" href="{% url 'contacto' %}"> Contáctenos </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-3 ">
+              <h5>
+                Maderas
+              </h5>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur
+                adipiscinaliquaLoreadipiscing
+              </p>
+            </div>
+            <div class="col-md-3 mx-auto  ">
+              <h5>
+                redes sociales
+              </h5>
+              <div class="social_box">
+                <a href="#">
+                  <i class="fa fa-facebook" aria-hidden="true"></i>
+                </a>
+                <a href="#">
+                  <i class="fa fa-twitter" aria-hidden="true"></i>
+                </a>
+                <a href="#">
+                  <i class="fa fa-linkedin" aria-hidden="true"></i>
+                </a>
+                <a href="#">
+                  <i class="fa fa-youtube-play" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <h5>
+                Nuestro centro de trabajo
+              </h5>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur
+                adipiscinaliquaLoreadipiscing
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="info_bottom">
+          <div class="row">
+            <div class="col-lg-9">
+              <div class="info_contact ">
+                <div class="row">
+                  <div class="col-md-3">
+                    <a href="#" class="link-box">
+                      <i class="fa fa-map-marker" aria-hidden="true"></i>
+                      <span>
+                        Ubicación
+                      </span>
+                    </a>
+                  </div>
+                  <div class="col-md-5">
+                    <a href="#" class="link-box">
+                      <i class="fa fa-phone" aria-hidden="true"></i>
+                      <span>
+                        Llamar +01 1234567890
+                      </span>
+                    </a>
+                  </div>
+                  <div class="col-md-4">
+                    <a href="#" class="link-box">
+                      <i class="fa fa-envelope" aria-hidden="true"></i>
+                      <span>
+                        demo@gmail.com
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="info_form ">
+                <form action="">
+                  <input type="email" placeholder="Enter Your Email" />
+                  <button>
+                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end info section -->
+
+  <!-- footer section -->
+  <footer class="footer_section">
+    <div class="container">
+      <p>
+        &copy; <span id="displayYear"></span> Todos los derechos reservados. Por
+        <a href="https://html.design/">Maximiliano Caro</a>
+      </p>
+    </div>
+  </footer>
+  <!-- footer section -->
+
+  <!-- jQery -->
+  <script src="{% static 'appt/js/jquery-3.4.1.min.js/' %}"></script>
+  <!-- popper js -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <!-- bootstrap js -->
+  <script src="{% static 'appt/js/bootstrap.js/' %}"></script>
+  <!-- owl slider -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <!--  OwlCarousel 2 - Filter -->
+  <script src="https://huynhhuynh.github.io/owlcarousel2-filter/dist/owlcarousel2-filter.min.js"></script>
+  <!-- nice select -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js" integrity="sha256-Zr3vByTlMGQhvMfgkQ5BtWRSKBGa2QlspKYJnkjZTmo=" crossorigin="anonymous"></script>
+  <!-- custom js -->
+  <script src="{% static 'appt/js/custom.js/' %}"></script>
+  <!-- Google Map -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
+  <!-- End Google Map -->
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

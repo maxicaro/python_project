@@ -1,0 +1,9 @@
+<h2>Gracias por tu pedido, {{ nombreusuario }}!</h2>
+<p>Detalles del pedido:</p>
+<ul>
+    {% for producto in productos_pedido %}
+        <li>{{ producto.nombre }} - Precio: {{ producto.precio }} - Cantidad: {{ producto.cantidad }}</li>
+    {% endfor %}
+</ul>
+<p><strong>Total de la compra:</strong> {{ total_compra }}</p>
+<p>Esperamos que disfrutes de tus productos. ¡Gracias por tu compra!</p>

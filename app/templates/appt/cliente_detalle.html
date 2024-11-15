@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cientes</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: url("{% static 'appt/images/fondo6.jpg' %}") no-repeat center center fixed; /* Reemplaza con una URL válida */
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        color: #fff;
+    }
+    h1, h3 {
+        text-align: center;
+        background-color:  #003c82;
+        padding: 10px;
+        border-radius: 10px;
+        color: #fff;
+    }
+    p {
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 15px;
+        border-radius: 8px;
+        margin: 20px auto;
+        max-width: 400px;
+        color: #333;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    a {
+        text-decoration: none;
+        color: #3498db;
+        font-weight: bold;
+    }
+    a:hover {
+        color: #2980b9;
+    }
+    .btn-home, .btn-back {
+        display: inline-block;
+        margin-top: 20px;
+        background-color: #003471;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-transform: uppercase;
+        font-weight: bold;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        margin-right: 10px;
+    }
+    .btn-home:hover, .btn-back:hover {
+        background-color: white;
+    }
+    .btn-home {
+        background-color:  #da7426;
+    }
+    .btn-home:hover {
+        background-color: white;
+    }
+    .button-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+</style>
+<body>
+
+    <div>
+        <h1>Clientes</h1>
+        <h3><p>Nombre: <i>{{ object.nombre  }}</i></p></h3>
+        <h3><p>Apellido: <i>{{ object.apellido  }}</i></p></h3>
+        <h3><p>Email: <i>{{ object.email  }}</i></p></h3>
+        <h3><p>Dirección: <i>{{ object.direccion  }}</i></p></h3>
+        <h3><p>Telefono: <i>{{ object.telefono  }}</i></p></h3>
+
+        <div class="button-container">
+            <a href="{% url 'List_client' %}" class="btn-back">Volver</a>
+            <a href="{% url 'padre' %}" class="btn-home">Inicio</a>
+        </div>
+    </div>
+
+</body>
+</html>
